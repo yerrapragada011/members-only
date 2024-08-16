@@ -1,10 +1,15 @@
 <html>
   <body>
-    <%= title %>
-    <ul>
-      <% messages.forEach((message) => { %> <%- include('message', {message:
-      message}) %> <% }); %>
-    </ul>
+    <%= title %> <% if (user) { %>
+    <a href="/logout">Logout</a>
     <a href="/new">New Message</a>
+    <% } else { %>
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    <% } %>
+    <ul>
+      <% messages.forEach((message) => { %> <%- include('message', { message:
+      message }) %> <% }); %>
+    </ul>
   </body>
 </html>

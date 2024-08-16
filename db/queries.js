@@ -1,9 +1,12 @@
 const pool = require('./pool')
+const bcrypt = require('bcryptjs')
 
 async function addUser(fullname, username, password, membership_status) {
+  const hashedPassword = await bcrypt.hash(password, 10)
+
   await pool.query(
-    'INSERT INTO users (fullname, username, password, membership status) VALUES ($1, $2, $3, $4)',
-    [fullname, username, password, membership_status]
+    'INSERT INTO users (fullname, username, password, membership_status) VALUES ($1, $2, $3, $4)',
+    [fullname, username, hashedPassword, membership_status]
   )
 }
 
@@ -19,8 +22,26 @@ async function addMessage(title, timestamp, message) {
   )
 }
 
+async function getUserByUsername(username) {
+  const result = await pool.query(
+    'SELECT id, username, password, membership_status FROM users WHERE username = $1',
+    [username]
+  )
+  return result.rows[0]
+}
+
+async function getUserById(id) {
+  const result = await pool.query(
+    'SELECT id, username, membership_status FROM users WHERE id = $1',
+    [id]
+  )
+  return result.rows[0]
+}
+
 module.exports = {
   addUser,
   getAllMessages,
-  addMessage
+  addMessage,
+  getUserByUsername,
+  getUserById
 }

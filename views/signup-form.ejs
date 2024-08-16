@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/register" method="POST">
+      <label for="fullname">Fullname</label>
+      <input id="fullname" name="fullname" placeholder="fullname" type="text" />
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" />
+      <label for="admin">Admin</label>
+      <input type="checkbox" name="admin" id="admin" />
+      <button>Sign Up</button>
+    </form>
+  </body>
+</html>
