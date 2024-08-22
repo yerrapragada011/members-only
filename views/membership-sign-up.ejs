@@ -7,10 +7,10 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>
-      Sorry, your login attempt was unsuccessful. Please check your username and
-      password and try again.
-    </p>
-    <a href="/login">Back to Login</a>
+    <form action="/membership" method="post">
+      <label for="passcode">Enter passcode: </label>
+      <input type="text" id="passcode" name="passcode" />
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>

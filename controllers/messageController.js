@@ -17,15 +17,22 @@ exports.addNewUserGet = async (req, res) => {
   })
 }
 
-exports.addNewUserPost = async (req, res) => {
+exports.addNewUserPost = async (req, res, next) => {
   const { fullname, username, password, admin } = req.body
+  const membership_status = false
 
   bcrypt.hash(password, 10, async (err, hashedPassword) => {
     if (err) {
       return next(err)
     }
     try {
-      await db.addUser(fullname, username, password, admin)
+      await db.addUser(
+        fullname,
+        username,
+        hashedPassword,
+        membership_status,
+        admin
+      )
       res.redirect('/')
     } catch (err) {
       return next(err)
@@ -39,7 +46,7 @@ exports.loginUserGet = async (req, res) => {
   })
 }
 
-exports.loginUserPost = (req, res, next) => {
+exports.loginUserPost = async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err)
@@ -60,11 +67,30 @@ exports.loginUserPost = (req, res, next) => {
   })(req, res, next)
 }
 
-exports.logoutUserGet = (req, res, next) => {
+exports.logoutUserGet = async (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err)
     }
     res.redirect('/')
   })
+}
+
+exports.clubMembershipGet = async (req, res) => {
+  res.render('membership-sign-up', {
+    title: 'Club Membership Sign Up'
+  })
+}
+
+exports.clubMembershipPost = async (req, res) => {
+  const { passcode } = req.body
+  const username = req.user.username
+  const correctPasscode = 'agasthya'
+
+  if (passcode === correctPasscode) {
+    await db.updateMembership(username)
+    res.redirect('/membership-success')
+  } else {
+    res.render('/membership-failure')
+  }
 }
