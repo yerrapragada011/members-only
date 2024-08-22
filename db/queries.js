@@ -23,10 +23,10 @@ async function getAllMessages() {
   return rows
 }
 
-async function addMessage(title, timestamp, message) {
+async function addMessage(title, timestamp, message, user_id) {
   await pool.query(
-    'INSERT INTO messages (title, timestamp, message) VALUES ($1, $2, $3)',
-    [title, timestamp, message]
+    'INSERT INTO messages (title, timestamp, message, user_id) VALUES ($1, $2, $3, $4)',
+    [title, timestamp, message, user_id]
   )
 }
 

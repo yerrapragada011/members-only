@@ -1,20 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const messageController = require('../controllers/messageController')
+const userController = require('../controllers/userController')
 
 router.get('/', messageController.messageList)
 
-router.get('/register', messageController.addNewUserGet)
+router.get('/newMessage', messageController.addNewMessageGet)
 
-router.post('/register', messageController.addNewUserPost)
+router.post('/newMessage', messageController.addNewMessagePost)
 
-router.get('/login', messageController.loginUserGet)
+router.get('/register', userController.addNewUserGet)
 
-router.post('/login', messageController.loginUserPost)
+router.post('/register', userController.addNewUserPost)
 
-router.get('/membership', messageController.clubMembershipGet)
+router.get('/login', userController.loginUserGet)
 
-router.post('/membership', messageController.clubMembershipPost)
+router.post('/login', userController.loginUserPost)
+
+router.get('/membership', userController.clubMembershipGet)
+
+router.post('/membership', userController.clubMembershipPost)
 
 router.get('/membership-failure', (req, res) => {
   res.render('membership-failure', { title: 'Incorrect Passcode' })
@@ -32,6 +37,6 @@ router.get('/login-success', (req, res) => {
   res.render('login-success', { title: 'Login Success' })
 })
 
-router.get('/logout', messageController.logoutUserGet)
+router.get('/logout', userController.logoutUserGet)
 
 module.exports = router
