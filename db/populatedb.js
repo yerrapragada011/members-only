@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 -- Insert sample data into users table
-INSERT INTO users (fullname, username, password, membership_status) 
+INSERT INTO users (fullname, username, password, membership_status, admin) 
 VALUES
   ('John Doe', 'johndoe', 'password123', FALSE, FALSE),
   ('Jane Smith', 'janesmith', 'password456', FALSE, FALSE),
