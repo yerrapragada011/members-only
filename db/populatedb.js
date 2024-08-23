@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
   fullname VARCHAR(255),
   username VARCHAR(320),
   password VARCHAR(255),
-  membership_status BOOLEAN
+  membership_status BOOLEAN,
+  admin BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS messages (
@@ -25,9 +26,9 @@ CREATE TABLE IF NOT EXISTS messages (
 -- Insert sample data into users table
 INSERT INTO users (fullname, username, password, membership_status) 
 VALUES
-  ('John Doe', 'johndoe', 'password123', FALSE),
-  ('Jane Smith', 'janesmith', 'password456', FALSE),
-  ('Alice Johnson', 'alicejohnson', 'password789', FALSE);
+  ('John Doe', 'johndoe', 'password123', FALSE, FALSE),
+  ('Jane Smith', 'janesmith', 'password456', FALSE, FALSE),
+  ('Alice Johnson', 'alicejohnson', 'password789', FALSE, FALSE);
 
 -- Insert sample data into messages table
 INSERT INTO messages (title, timestamp, message, user_id) 
