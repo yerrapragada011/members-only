@@ -9,6 +9,8 @@ router.get('/newMessage', messageController.addNewMessageGet)
 
 router.post('/newMessage', messageController.addNewMessagePost)
 
+router.post('/deleteMessage/:id', messageController.adminMessageDelete)
+
 router.get('/register', userController.addNewUserGet)
 
 router.post('/register', userController.addNewUserPost)

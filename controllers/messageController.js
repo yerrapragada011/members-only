@@ -28,3 +28,18 @@ exports.addNewMessagePost = async (req, res) => {
     res.status(500).send('Error adding message')
   }
 }
+
+exports.adminMessageDelete = async (req, res) => {
+  const isAdmin = req.user.admin
+  const messageId = req.params.id
+
+  if (isAdmin) {
+    try {
+      await db.deleteMessage(messageId)
+      res.redirect('/')
+    } catch (err) {
+      console.error('Error deleting message:', err)
+      res.status(500).send('Error deleting message')
+    }
+  }
+}

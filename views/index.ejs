@@ -7,8 +7,6 @@
     <a href="/register">Register</a>
     <a href="/login">Login</a>
     <% } %>
-    <% console.log(messages) %>
-    <% console.log(user) %>
     <ul>
       <% messages.forEach((message) => { %> <%- include('message', { message:
       message, user: user }) %> <% }); %>

@@ -8,7 +8,9 @@
   <body>
     <h1>Welcome, <%= username %>!</h1>
     <p><%= message %></p>
-    <a href="/membership">Sign up to be a club member!</a>
+    <% if (!membership_status) { %>
+      <a href="/membership">Sign up to be a club member!</a>
+    <% } %>
     <a href="/">Go home</a>
   </body>
 </html>

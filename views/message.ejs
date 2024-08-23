@@ -4,3 +4,9 @@
 <p>Author: <%= message.author %></p>
 <% } %>
 <p><%= message.message %></p>
+
+<% if (user && user.admin) { %>
+  <form action="/deleteMessage/<%= message.id %>" method="POST" style="display:inline;">
+    <button type="submit">Delete</button>
+  </form>
+<% } %>

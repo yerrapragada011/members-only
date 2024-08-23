@@ -1,5 +1,4 @@
 const pool = require('./pool')
-const bcrypt = require('bcryptjs')
 
 async function addUser(
   fullname,
@@ -55,11 +54,16 @@ async function updateMembership(username) {
   console.log('Update result:', result.rows[0])
 }
 
+async function deleteMessage(messageId) {
+  await pool.query('DELETE FROM messages WHERE id = $1', [messageId])
+}
+
 module.exports = {
   addUser,
   getAllMessages,
   addMessage,
   getUserByUsername,
   getUserById,
-  updateMembership
+  updateMembership,
+  deleteMessage
 }

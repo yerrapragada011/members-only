@@ -10,7 +10,11 @@ exports.addNewUserGet = async (req, res) => {
 
 exports.addNewUserPost = async (req, res, next) => {
   const { fullname, username, password, admin } = req.body
-  const membership_status = false
+  let membership_status = false
+
+  if (admin) {
+    membership_status = true
+  }
 
   bcrypt.hash(password, 10, async (err, hashedPassword) => {
     if (err) {
@@ -52,7 +56,8 @@ exports.loginUserPost = async (req, res, next) => {
       res.render('login-success', {
         title: 'Login Successful',
         username: user.username,
-        message: 'You have successfully logged in'
+        message: 'You have successfully logged in',
+        membership_status: user.membership_status
       })
     })
   })(req, res, next)
