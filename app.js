@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const sessionStore = new PSQLStore({
-  conString: `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
+  conString: `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PORT}/${process.env.PGDATABASE}`
 })
 
 app.use(
@@ -33,7 +33,7 @@ app.use(passport.session())
 
 app.use('/', indexRouter)
 
-const port = process.env.PGPORT || 3000
+const port = process.env.PORT || 3000
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Example app listening on port ${port}`)
