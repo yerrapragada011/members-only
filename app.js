@@ -33,7 +33,8 @@ app.use(passport.session())
 
 app.use('/', indexRouter)
 
-const port = 3000
-app.listen(port, () => {
+const port = process.env.PGPORT || 3000
+
+app.listen(port, '0.0.0.0', () => {
   console.log(`Example app listening on port ${port}`)
 })
